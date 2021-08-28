@@ -1,0 +1,115 @@
+import React from "react";
+const Form = (props) => {
+  const arr = [];
+  for (let i = 0; i < 3; i++)
+    arr.push({
+      name: "",
+      rating: ""
+    });
+  const [data, setData] = React.useState(arr);
+  console.log(data);
+  const onChange = (value, formKey, indx) => {
+    const orgData = [...data];
+    orgData[indx][formKey] = value;
+    setData([...orgData]);
+  };
+  return (
+    <>
+      {data.map((item, index) => {
+        return (
+          <div key={index}>
+            <input
+              value={data[index]["name"]}
+              onChange={(e) => onChange(e.target.value, "name", index)}
+            />
+            <input
+              value={data[index]["rating"]}
+              onChange={(e) => onChange(e.target.value, "rating", index)}
+            />
+          </div>
+        );
+      })}
+    </>
+  );
+};
+export default Form;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+   <Box mt={3} mb={3} display={`flex`} style={{alignItems: 'center'}}>
+          <Box className={classes.drawerInputBox}>
+                  <input 
+                    type="file" 
+                  id="user_work" 
+                  name="file" 
+                  multiple
+                    onChange={changeHandler}
+                      style={{display: 'none'}}
+                           accept ="application/pdf, image/jpeg, image/png, application/msword" 
+                              />
+                                                            
+                         {isFilePicked   ?
+                                        <>
+                                        {
+                                                                            images && images.map((item, i) => {
+                                                                                return(
+                                                                                    <Box mb={1}>
+                                                                                        <Button
+                                                                                            variant="contained"
+                                                                                            color="primary"
+                                                                                            
+                                                                                            className={classes.drawerbutton}
+                                                                                            startIcon={
+                                                                                                selectedFile && selectedFile.name.includes("pdf")
+                                                                                                ?
+                                                                                                <img src={pdfIcon } />
+                                                                                                :
+                                                                                                selectedFile && selectedFile.name.includes("jpg")
+                                                                                                ?
+                                                                                                <img src={imgIcon } />
+                                                                                                :
+                                                                                                ''  
+                                                                                            }
+                                                                                            endIcon={<img src={clearIcon} />}
+                                                                                            onClick={() => handleImageRemove(item, i)}
+                                                                                        >
+                                                                                            {item.name.slice(0, item.name.lastIndexOf("."))}
+                                                                                        </Button>
+                                                                                    </Box>
+                                                                                )
+                                                                            })
+                                                                        }
+                                                                    </>
+                                                                    :
+                                                                    <label 
+                                                                        htmlFor="user_work" 
+                                                                        
+                                                                    >
+                                                                        <Typography style={{cursor: 'pointer'}} variant="h6" className={classes.drawerDesc}>
+                                                                            Upload your activity
+                                                                        </Typography> 
+                                
+                                                                    </label>
+                                                                    
+                
+                                                                }
+                                                        </Box>
+                                                        <Button 
+                                                            onClick={() => handleSubmission(item)} 
+                                                            className={classes.drawerbutton}
+                                                            style={{height: '40px'}}
+                                                        >Upload</Button>
+                                                    </Box>
+    
